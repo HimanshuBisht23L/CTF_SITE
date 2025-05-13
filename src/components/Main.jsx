@@ -1,8 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import '../styles/Main.css'
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 
 export default function Main() {
+      const { isAuthenticated  } = useAuth0();
     const navigate = useNavigate();
 
     return (
@@ -30,7 +33,7 @@ export default function Main() {
 
                 {/* Cards */}
                 <section className="cards">
-                    <div onClick={() => navigate("/Task1")} className="card">
+                    <div onClick={() => isAuthenticated ? navigate("/Task1") : alert("Login First!!!")} className="card">
                         <div className="icon red">🛡️</div>
                         <h3>Web Application Security</h3>
                         <p>Introduction to web Application Security</p>
@@ -40,7 +43,7 @@ export default function Main() {
                         </div>
                     </div>
 
-                    <div onClick={() => navigate("/Task2")} className="card">
+                    <div onClick={() => isAuthenticated ?  navigate("/Task2") : alert("Login First!!!")} className="card">
                         <div className="icon blue">🔵</div>
                         <h3>Blue Team Analyst</h3>
                         <p>Build your skills as a junior blue team analyst</p>
@@ -50,33 +53,33 @@ export default function Main() {
                         </div>
                     </div>
 
-                    <div onClick={() => navigate("/Task3")} className="card">
+                    <div onClick={() => isAuthenticated ?  navigate("/Task3"): alert("Login First!!!")} className="card">
                         <div className="icon yellow">🔓</div>
                         <h3>Cryptography Unlocked</h3>
                         <p>A junior’s guide to breaking cryptography</p>
                         <div className="details">
                             <span className="difficulty medium">Medium</span>
-                            <span>📦 23 challenges</span>
+                            <span>📦 5 challenges</span>
                         </div>
                     </div>
 
-                    <div onClick={() => navigate("/Task4")} className="card">
+                    <div onClick={() => isAuthenticated ?  navigate("/Task4") : alert("Login First!!!")} className="card">
                         <div className="icon yellow">🔓</div>
-                        <h3>Cryptography Unlocked</h3>
+                        <h3>Image Unlocked</h3>
                         <p>A junior’s guide to breaking cryptography</p>
                         <div className="details">
                             <span className="difficulty medium">Medium</span>
-                            <span>📦 23 challenges</span>
+                            <span>📦 1 challenges</span>
                         </div>
                     </div>
 
-                    <div onClick={() => navigate("/Task5")} className="card">
+                    <div onClick={() => isAuthenticated ?  navigate("/Task5") : alert("Login First!!!") } className="card">
                         <div className="icon yellow">🔓</div>
-                        <h3>Cryptography Unlocked</h3>
+                        <h3>Cap File Unlocked</h3>
                         <p>A junior’s guide to breaking cryptography</p>
                         <div className="details">
                             <span className="difficulty medium">Medium</span>
-                            <span>📦 23 challenges</span>
+                            <span>📦 1 challenges</span>
                         </div>
                     </div>
                 </section>

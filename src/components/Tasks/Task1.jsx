@@ -13,6 +13,7 @@ export default function Task1() {
     navigate('/');
   };
 
+
   return (
     <main className="task-container">
       <button className="back-btn" onClick={goBack}>
@@ -26,9 +27,9 @@ export default function Task1() {
       <h1 className="page-title">Task 1: Q&A</h1>
 
       <div className='Quesion_head'>
-         <h3>"Young "knows nothing politics" becomes MP" answer all the questions related to this above statement and make sure to keep your mind open and remember The internet never forgets and If it's online, it's findable.</h3> 
+         <h3>"Young "knows nothing politics" becomes MP"  "youtuber turned politician", answer all the questions related to this above statement and make sure to keep your mind open and remember The internet never forgets and If it's online, it's findable.</h3> 
       </div>
-
+    
       <div className="qa-box">
         <h3>1. unit they serve during their mandatory military service?</h3>
         <textarea className="answer-input" placeholder="Write your answer here..."></textarea>
