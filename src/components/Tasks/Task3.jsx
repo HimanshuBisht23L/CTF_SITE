@@ -1,8 +1,35 @@
 import { useNavigate } from 'react-router-dom';
 import '../../styles/TaskCss/Task3.css';
+import { useState, useEffect } from 'react';
 
 export default function Task3() {
   const navigate = useNavigate();
+  const [Answer1, setAnswer1] = useState('');
+  const [Answer2, setAnswer2] = useState('');
+  const [Answer3, setAnswer3] = useState('');
+  const [Answer4, setAnswer4] = useState('');
+  const [Answer5, setAnswer5] = useState('');
+
+  // Load saved answers
+  useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem('task3Answers'));
+    if (Array.isArray(saved)) {
+      setAnswer1(saved[0] || '');
+      setAnswer2(saved[1] || '');
+      setAnswer3(saved[2] || '');
+      setAnswer4(saved[3] || '');
+      setAnswer5(saved[4] || '');
+    }
+  }, []);
+
+  // Auto-save answers
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const answers = [Answer1, Answer2, Answer3, Answer4, Answer5];
+      localStorage.setItem('task3Answers', JSON.stringify(answers));
+    }, 300);
+    return () => clearTimeout(timeout);
+  }, [Answer1, Answer2, Answer3, Answer4, Answer5]);
 
   const SendCode = () => {
     alert("Successfully Submitted Answers");
@@ -31,7 +58,7 @@ export default function Task3() {
           <br />
           🔍 Challenge Artifacts:
           You are given a text file named intercepted_message.txt with the following content:
-
+          <br />
           pgsql
           <br />
           Step 1:
@@ -44,7 +71,8 @@ export default function Task3() {
           Encrypted with: Vigenère Cipher using keyword: "orion"
           <br />
           Step 4:
-          Final output is Base64 encoded again.</h3>
+          Final output is Base64 encoded again.
+        </h3>
       </div>
 
       <div className="qa-box">
@@ -53,7 +81,12 @@ export default function Task3() {
           Description: The first line is encrypted using ROT13.
           <br />
           Decrypt: Uryyb Jbeyq! Gur svefg frperg vf gurer.<br />Answer format: ROT13: [plaintext]</h3>
-        <textarea className="answer-input" placeholder="Write your answer here..."></textarea>
+        <textarea
+          className="answer-input3"
+          value={Answer1}
+          onChange={(e) => setAnswer1(e.target.value)}
+          placeholder="Write your answer here..."
+        />
       </div>
 
       <div className="qa-box">
@@ -64,15 +97,26 @@ export default function Task3() {
           Decode: QkZmRU5EbFFXMXU=
           <br />
           Answer format: Base64: [plaintext]</h3>
-        <textarea className="answer-input" placeholder="Write your answer here..."></textarea>
+        <textarea
+          className="answer-input3"
+          value={Answer2}
+          onChange={(e) => setAnswer2(e.target.value)}
+          placeholder="Write your answer here..."
+        />
       </div>
 
       <div className="qa-box">
         <h3>3. Vigenère Cipher Decryption
+          <br />
           Description: Decrypt the result from Q2 using the Vigenère Cipher with keyword "orion".
-
+          <br />
           Answer format: Vigenere: [plaintext]</h3>
-        <textarea className="answer-input" placeholder="Write your answer here..."></textarea>
+        <textarea
+          className="answer-input3"
+          value={Answer3}
+          onChange={(e) => setAnswer3(e.target.value)}
+          placeholder="Write your answer here..."
+        />
       </div>
 
       <div className="qa-box">
@@ -83,13 +127,23 @@ export default function Task3() {
           Task: Perform the final Base64 decode to retrieve the full message.
           <br />
           Answer format: Final Message: [plaintext]</h3>
-        <textarea className="answer-input" placeholder="Write your answer here..."></textarea>
+        <textarea
+          className="answer-input3"
+          value={Answer4}
+          onChange={(e) => setAnswer4(e.target.value)}
+          placeholder="Write your answer here..."
+        />
       </div>
 
       <div className="qa-box">
-        <h3>5.  The Flag <br />
+        <h3>5. The Flag <br />
           {`Task: Extract the CTF flag from the message. The flag will be in the format: CTF{...}`}</h3>
-        <textarea className="answer-input" placeholder="Write your answer here..."></textarea>
+        <textarea
+          className="answer-input3"
+          value={Answer5}
+          onChange={(e) => setAnswer5(e.target.value)}
+          placeholder="Write your answer here..."
+        />
       </div>
 
       <div className="submit-section">

@@ -1,8 +1,24 @@
 import { useNavigate } from 'react-router-dom';
 import '../../styles/TaskCss/Task4.css';
+import { useState, useEffect } from 'react';
 
 export default function Task4() {
   const navigate = useNavigate();
+  const [answer, setAnswer] = useState('');
+
+  // Load answers
+  useEffect(() => {
+    const saved = localStorage.getItem('task4Answer');
+    if (saved) setAnswer(saved);
+  }, []);
+
+  // save answer
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      localStorage.setItem('task4Answer', answer);
+    }, 300);
+    return () => clearTimeout(timeout);
+  }, [answer]);
 
   const SendCode = () => {
     alert("Successfully Submitted Answers");
@@ -41,8 +57,13 @@ export default function Task4() {
       </div>
 
       <div className="qa-box">
-        <h3>Answer in this format : <br/><br/> {`FLAG = ctfa{terrific_traffic}`} <br/> protocal = TCP </h3>
-        <textarea className="answer-input" placeholder="Write your answer here..."></textarea>
+        <h3>Answer in this format: <br /><br /> {`FLAG = ctfa{terrific_traffic}`} <br /> protocol = TCP </h3>
+        <textarea
+          className="answer-input4"
+          placeholder="Write your answer here..."
+          value={answer}
+          onChange={(e) => setAnswer(e.target.value)}
+        ></textarea>
       </div>
 
       <div className="submit-section">

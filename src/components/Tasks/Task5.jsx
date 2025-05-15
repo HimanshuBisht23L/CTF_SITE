@@ -1,8 +1,24 @@
 import { useNavigate } from 'react-router-dom';
 import '../../styles/TaskCss/Task5.css';
+import { useState, useEffect } from 'react';
 
 export default function Task5() {
   const navigate = useNavigate();
+  const [answer, setAnswer] = useState('');
+
+  // Load answer
+  useEffect(() => {
+    const saved = localStorage.getItem('task5Answer');
+    if (saved) setAnswer(saved);
+  }, []);
+
+  // Save Answer
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      localStorage.setItem('task5Answer', answer);
+    }, 300);
+    return () => clearTimeout(timeout);
+  }, [answer]);
 
   const SendCode = () => {
     alert("Successfully Submitted Answers");
@@ -42,7 +58,12 @@ export default function Task5() {
 
       <div className="qa-box">
         <h3>Answer in this format : <br /><br /> {`first flag = ctfa{HTTP_FTW}`} <br /> {`second flag = ctfa{HTTP_31337}`} </h3>
-        <textarea className="answer-input" placeholder="Write your answer here..."></textarea>
+        <textarea
+          className="answer-input5"
+          placeholder="Write your answer here..."
+          value={answer}
+          onChange={(e) => setAnswer(e.target.value)}
+        ></textarea>
       </div>
 
       <div className="submit-section">
