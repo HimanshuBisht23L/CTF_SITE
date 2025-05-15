@@ -2,8 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/Main.css'
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from 'axios';
-import { use } from 'react';
-
 
 
 export default function Main() {
@@ -28,7 +26,7 @@ export default function Main() {
         localStorage.clear();
 
         try {
-            const result = await axios.post('http://localhost:3000/submitted', {
+            const result = await axios.post('https://ctf-backend-gmv3.onrender.com/submitted', {
                 email : user.email,
                 answers: finalAnswers,
             })
